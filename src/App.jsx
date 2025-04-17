@@ -7,7 +7,6 @@ class App extends Component {
         <h1>Colors</h1>
       )
   }
-  
 }
 
 export default App
