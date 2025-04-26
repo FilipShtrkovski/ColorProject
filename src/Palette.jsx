@@ -20,7 +20,6 @@ class Palette extends Component {
 
   changeFormat(value){
     this.setState({format: value})
-    console.log(value)
   }
 
   render(){
