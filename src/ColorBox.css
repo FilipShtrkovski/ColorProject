@@ -30,7 +30,6 @@
     background: rgba(255, 255, 255, 0.3);
     font-size: 1rem;
     line-height: 30px;
-    color: white;
     text-transform: uppercase;
     border: none;
     text-decoration: none;
@@ -56,13 +55,20 @@
     font-size: 12px;
 }
 
+.light-text{
+    color: white;
+}
+
+.dark-text{
+    color: rgba(0,0,0, 0.6);
+}
+
 .see-more{
     background: rgba(255, 255, 255, 0.3);
     position: absolute;
     border: none;
     right: 0px;
     bottom: 0;
-    color: white;
     width: 60px;
     height: 30px;
     text-align: center;
@@ -100,7 +106,6 @@
     font-size: 2rem;
     transform: scale(0.1);
     opacity: 0;
-    color: white;
 }
 
 .copy-msg.show{
