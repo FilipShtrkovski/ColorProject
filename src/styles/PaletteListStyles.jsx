@@ -1,3 +1,5 @@
+
+
 export default {
     root:{
         backgroundColor: "blue",
@@ -14,9 +16,14 @@ export default {
         flexWrap: "wrap"
     },
     nav: {
-        dispaly: "flex",
+        width: '100%',
+        display: "flex",     
         justifyContent: "space-between",
-        color: "white"
+        alignItems: 'center',
+        color: "white",
+        '& a': {
+            color: 'white'
+        }
 
     },
     palettes: {
