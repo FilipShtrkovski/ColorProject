@@ -77,13 +77,14 @@ class NewPaletteForm extends Component {
     super(props)
     this.state = {
       open:false,
-      background: '#fff'
+      currentColor: 'teal',
+      colors: ['purple','#e15764']
     }
 
   }
   
   handleChangeComplete = (color) => {
-    this.setState({ background: color.hex });
+    this.setState({ currentColor: color.hex });
   };
 
   handleDrawerOpen = () => {
@@ -94,8 +95,14 @@ class NewPaletteForm extends Component {
     this.setState({ open: false });
   };
 
+  addColor = () => {
+    this.setState({
+      colors:[...this.state.colors, this.state.currentColor]
+    })
+  }
+
 render(){
-  const {open} = this.state
+  const {open, currentColor, colors} = this.state
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -146,13 +153,22 @@ render(){
           <Button variant='contained' color='secondary' >Clear Palette</Button>
           <Button variant='contained' color='primary' >Random Color</Button>
         </div>
-        <ChromePicker color={ this.state.background }
+        <ChromePicker color={ currentColor }
         onChangeComplete={ this.handleChangeComplete }/>
-        <Button variant='contained' color={'primary'}>Add Color</Button>
+        <Button
+         variant='contained' 
+         color='primary' 
+         style={{backgroundColor: currentColor}}
+         onClick={this.addColor}
+         >Add Color</Button>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        
+        <ul>
+          {colors.map(color=>(
+            <li style={{backgroundColor:color}}>{color}</li>
+          ))}
+        </ul>
       </Main>
     </Box>
   );
