@@ -13,12 +13,14 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Button } from '@mui/material';
+import DraggableColorBox from './DraggableColorBox';
 
 
 const drawerWidth = 450;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme }) => ({
+    height: 'calc(100vh - 45px)',
     flexGrow: 1,
     padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
@@ -164,11 +166,9 @@ render(){
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        <ul>
           {colors.map(color=>(
-            <li style={{backgroundColor:color}}>{color}</li>
+            <DraggableColorBox color={color}/>
           ))}
-        </ul>
       </Main>
     </Box>
   );
