@@ -1,5 +1,8 @@
 import { Component } from 'react';
 import { ChromePicker } from 'react-color';
+import DraggableColorBox from './DraggableColorBox';
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+
 import { styled} from '@mui/material/styles';
 import { withStyles } from '@mui/styles'
 import Box from '@mui/material/Box';
@@ -15,10 +18,12 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Button } from '@mui/material';
 
 
+
 const drawerWidth = 450;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme }) => ({
+    height: 'calc(100vh - 45px)',
     flexGrow: 1,
     padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
@@ -78,10 +83,25 @@ class NewPaletteForm extends Component {
     this.state = {
       open:false,
       currentColor: 'teal',
-      colors: ['purple','#e15764']
+      colors: [],
+      newName: ''
     }
 
   }
+
+  componentDidMount() {
+    // custom rule will have name 'isPasswordMatch'
+    ValidatorForm.addValidationRule('isColorNameUnique', (value) => 
+        this.state.colors.every(
+          ({name}) => name.toLowerCase() !== value.toLowerCase()
+        )
+    );
+    ValidatorForm.addValidationRule('isColorUnique', () => 
+      this.state.colors.every(
+        ({color}) => color !== this.state.currentColor
+      )
+  );
+}
   
   handleChangeComplete = (color) => {
     this.setState({ currentColor: color.hex });
@@ -96,13 +116,21 @@ class NewPaletteForm extends Component {
   };
 
   addColor = () => {
+    const newColor = {color: this.state.currentColor, name: this.state.newName}
     this.setState({
-      colors:[...this.state.colors, this.state.currentColor]
+      colors:[ ...this.state.colors, newColor ],newName:''
     })
   }
 
+  handleChange = (evt) => {
+    this.setState({
+      newName: evt.target.value
+    })
+    
+  }
+
 render(){
-  const {open, currentColor, colors} = this.state
+  const {open, currentColor, colors, newName} = this.state
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -155,20 +183,26 @@ render(){
         </div>
         <ChromePicker color={ currentColor }
         onChangeComplete={ this.handleChangeComplete }/>
-        <Button
-         variant='contained' 
-         color='primary' 
-         style={{backgroundColor: currentColor}}
-         onClick={this.addColor}
-         >Add Color</Button>
+        <ValidatorForm onSubmit={this.addColor} onError={errors => console.log(errors)}>
+          <TextValidator 
+            value={newName} 
+            onChange={this.handleChange}
+            validators={['required', 'isColorNameUnique', 'isColorUnique']}
+            errorMessages={['enter a color name', 'name already exists', 'color already used']}/>
+          <Button
+            variant='contained' 
+            color='primary' 
+            style={{backgroundColor: currentColor}}
+            type='submit'
+          >Add Color</Button>
+        </ValidatorForm>
+        
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        <ul>
           {colors.map(color=>(
-            <li style={{backgroundColor:color}}>{color}</li>
+            <DraggableColorBox color={color.color} name={color.name}/>
           ))}
-        </ul>
       </Main>
     </Box>
   );
