@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { Component } from 'react';
+import { ChromePicker } from 'react-color';
 import { styled} from '@mui/material/styles';
 import { withStyles } from '@mui/styles'
 import Box from '@mui/material/Box';
@@ -12,9 +12,10 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { Button } from '@mui/material';
 
 
-const drawerWidth = 240;
+const drawerWidth = 450;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme }) => ({
@@ -75,10 +76,15 @@ class NewPaletteForm extends Component {
   constructor(props){
     super(props)
     this.state = {
-      open:false
+      open:false,
+      background: '#fff'
     }
+
   }
   
+  handleChangeComplete = (color) => {
+    this.setState({ background: color.hex });
+  };
 
   handleDrawerOpen = () => {
     this.setState({ open: true });
@@ -133,9 +139,20 @@ render(){
           </IconButton>
         </DrawerHeader>
         <Divider />
+        <Typography variant='h4'>
+          Design Your Palette
+        </Typography>
+        <div>
+          <Button variant='contained' color='secondary' >Clear Palette</Button>
+          <Button variant='contained' color='primary' >Random Color</Button>
+        </div>
+        <ChromePicker color={ this.state.background }
+        onChangeComplete={ this.handleChangeComplete }/>
+        <Button variant='contained' color={'primary'}>Add Color</Button>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
+        
       </Main>
     </Box>
   );
