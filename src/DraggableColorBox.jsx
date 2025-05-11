@@ -3,47 +3,45 @@ import { withStyles } from '@mui/styles'
 import { FaTrashCan } from "react-icons/fa6";
 
 const styles = {
-    root: {
-        width: '20%',
-        height: '25%',
-        margin: '0 auto',
-        display: 'inline-block',
-        position: 'relative',
-        cursor: 'pointer',
-        marginBottom: '-7px',
-        '&:hover svg': {
-          color: 'white',
-          transform: 'scale(2.0)'
-        } 
-    },
-    boxContent: {
-      display: 'flex',
-      position: 'absolute',
-      width: '100%',
-      left: '0px',
-      color: 'rgba(0,0,0,0.5)',
-      bottom: '0px',
-      padding: '10px',
-      letterSpacing: '1px',
-      textTransform: 'uppercase',
-      fontSize: '12px',
-      justifyContent: 'space-between'
-    },
-    deleteIcon: {
-      transition: 'all 0.3s ease-in-out'
-    }
-    
+  root: {
+      width: '20%',
+      height: '25%',
+      margin: '0 auto',
+      display: 'inline-block',
+      position: 'relative',
+      cursor: 'pointer',
+      marginBottom: '-7px',
+      '&:hover svg': {
+        color: 'white',
+        transform: 'scale(2.0)'
+      } 
+  },
+  boxContent: {
+    display: 'flex',
+    position: 'absolute',
+    width: '100%',
+    left: '0px',
+    color: 'rgba(0,0,0,0.5)',
+    bottom: '0px',
+    padding: '10px',
+    letterSpacing: '1px',
+    textTransform: 'uppercase',
+    fontSize: '12px',
+    justifyContent: 'space-between'
+  },
+  deleteIcon: {
+    transition: 'all 0.3s ease-in-out'
+  }
 }
 
 function DraggableColorBox(props) {
-  const {classes} = props
+  const {classes, handleDelete, name, color} = props
   return (
-    <div className={classes.root} style={{backgroundColor:props.color}}>
+    <div className={classes.root} style={{backgroundColor:color}}>
       <div className={classes.boxContent}>
-        <span>{props.name}</span>
-        <FaTrashCan className={classes.deleteIcon}/>
+        <span>{name}</span>
+        <FaTrashCan onClick={handleDelete} className={classes.deleteIcon}/>
       </div>
-        
     </div>
   )
 }
