@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { ChromePicker } from 'react-color';
 import DraggableColorBox from './DraggableColorBox';
+import DraggableColorList from './DraggableColorList';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 import { styled} from '@mui/material/styles';
@@ -154,6 +155,12 @@ class NewPaletteForm extends Component {
     })
   }
 
+  sortedColors = (colors) => {
+    this.setState({
+      colors
+    })
+  }
+
 render(){
   const {open, currentColor, colors, newColorName, newPaletteName} = this.state
   return (
@@ -237,17 +244,14 @@ render(){
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-          {colors.map(color=>(
-            <DraggableColorBox 
-              handleDelete={() => this.handleDelete(color.name)} 
-              color={color.color} 
-              name={color.name}/>
-          ))}
+          <DraggableColorList sortedColors={this.sortedColors} 
+          colors={colors} handleDelete={this.handleDelete} />
       </Main>
     </Box>
-  );
+  )};
+
 }
-}
+
 
 export default withStyles(styled, { withTheme: true })(NewPaletteForm);
 
