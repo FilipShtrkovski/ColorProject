@@ -2,6 +2,7 @@ import React from 'react'
 import { withStyles } from '@mui/styles'
 import { FaTrashCan } from "react-icons/fa6";
 
+
 const styles = {
   root: {
       width: '20%',
@@ -34,7 +35,7 @@ const styles = {
   }
 }
 
-function DraggableColorBox(props) {
+const DraggableColorBox = (props) => {
   const {classes, handleDelete, name, color} = props
   return (
     <div className={classes.root} style={{backgroundColor:color}}>
