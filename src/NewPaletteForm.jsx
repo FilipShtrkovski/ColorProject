@@ -18,8 +18,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Button } from '@mui/material';
 
-
-
 const drawerWidth = 450;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -78,13 +76,18 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
+
+
 class NewPaletteForm extends Component {
+  static defaultProps = {
+    maxColors: 20
+  }
   constructor(props){
     super(props)
     this.state = {
       open:false,
       currentColor: 'teal',
-      colors: [],
+      colors: this.props.palettes[0].colors,
       newColorName: '',
       newPaletteName: ''
     }
@@ -146,12 +149,20 @@ class NewPaletteForm extends Component {
     this.props.savePalette(newPalette)
     this.props.history.push('/')
   }
+  
+  
 
   handleDelete = (colorName) => {
     this.setState({
-      colors: this.state.colors.filter(color => {
-        color.name !== colorName
-      })
+      colors: this.state.colors.filter(color => color.name !== colorName)
+    })
+  }
+
+  handleRandomColor = () => {
+    const allColors = this.props.palettes.map(p => p.colors).flat()
+    const rand  = Math.floor(Math.random() * allColors.length)
+    this.setState({
+      colors: [...this.state.colors, allColors[rand]]
     })
   }
 
@@ -161,8 +172,16 @@ class NewPaletteForm extends Component {
     })
   }
 
+  clearPalette = () => {
+    this.setState({
+      colors: []
+    })
+  }
+
 render(){
   const {open, currentColor, colors, newColorName, newPaletteName} = this.state
+  const {maxColors} = this.props
+  let disabled = colors.length >= maxColors
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -221,11 +240,21 @@ render(){
           Design Your Palette
         </Typography>
         <div>
-          <Button variant='contained' color='secondary' >Clear Palette</Button>
-          <Button variant='contained' color='primary' >Random Color</Button>
+          <Button 
+            onClick={this.clearPalette}
+            variant='contained' 
+            color='secondary' 
+          >Clear Palette</Button>
+          <Button 
+            onClick={this.handleRandomColor}
+            variant='contained'
+            color='primary'
+            disabled={disabled}
+          >Random Color</Button>
         </div>
-        <ChromePicker color={ currentColor }
-        onChangeComplete={ this.handleChangeComplete }/>
+        <ChromePicker 
+          color={ currentColor }
+          onChangeComplete={ this.handleChangeComplete }/>
         <ValidatorForm onSubmit={this.addColor} onError={errors => console.log(errors)}>
           <TextValidator 
             name='newColorName'
@@ -238,9 +267,9 @@ render(){
             color='primary' 
             style={{backgroundColor: currentColor}}
             type='submit'
+            disabled={disabled}
           >Add Color</Button>
         </ValidatorForm>
-        
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
