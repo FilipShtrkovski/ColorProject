@@ -92,6 +92,7 @@ class PaletteFormNav extends Component {
                     value={newPaletteName}
                     validators={['required', 'paletteNameUnique']}
                     errorMessages={['Enter Palette Name', 'Palette Name Already Exists']}/>
+                    
                     <Button 
                     variant='contained' 
                     color='primary' 
@@ -99,10 +100,10 @@ class PaletteFormNav extends Component {
                     >
                     Save Palette
                     </Button>
-                    <Link to='/'>
+                </ValidatorForm>
+                  <Link to='/'>
                         <Button variant='contained' color='secondary'>Go Back</Button>
                     </Link>
-                </ValidatorForm>
                 </Toolbar>
         </AppBar>
         </Box>
