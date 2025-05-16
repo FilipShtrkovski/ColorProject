@@ -15,18 +15,16 @@ import { Button } from '@mui/material';
 
 const drawerWidth = 450;
 
-const styles = {
-  root: {
-    display: 'flex'
-  },
-  bts: {
-    display: 'flex',
-    alignItems: 'center',
-    flexDirection:'row',
-    marginRight: '1.5rem'
-  }
-  
-}
+const Root = styled(Box)(()=> ({
+  display: 'flex',
+}))
+
+const BoxBts = styled(Box)(() => ({
+  display: 'flex',
+  alignItems: 'center',
+  flexDirection:'row',
+  marginRight: '1.5rem'
+}));
 
 const AppBar = styled(MiniAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
@@ -77,10 +75,10 @@ class PaletteFormNav extends Component {
       }
     
   render() {
-    const {handleDrawerOpen, open, handleSubmit,classes} = this.props
+    const {handleDrawerOpen, open, handleSubmit} = this.props
     const {newPaletteName} = this.state
     return (
-      <Box className={classes.root}>
+      <Root>
         <CssBaseline />
         <AppBar position="fixed" color="default" open={open}>
           <Toolbar>
@@ -97,8 +95,8 @@ class PaletteFormNav extends Component {
             Color Palette
           </Typography>
           </Toolbar>
-          <Box className={ classes.bts }>
-            <ValidatorForm className={ classes.form } onSubmit={() => handleSubmit(newPaletteName)}>
+          <BoxBts>
+            <ValidatorForm onSubmit={() => handleSubmit(newPaletteName)}>
               <TextValidator 
                 name='newPaletteName'
                 label='Palette Name'
@@ -118,10 +116,10 @@ class PaletteFormNav extends Component {
               <Link to='/'>
                 <Button variant='contained' color='secondary'>Go Back</Button>
               </Link>
-            </Box>
+            </BoxBts>
           </AppBar>
-        </Box>
+        </Root>
       )
     }
 }
-export default withStyles(styles, styled,  { withTheme: true })(PaletteFormNav)
+export default withStyles(styled)(PaletteFormNav)

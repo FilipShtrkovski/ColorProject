@@ -49,6 +49,14 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
+const DrawerContainer = styled('div')(() => ({
+  width: '90%',
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center'
+}));
 
 
 class NewPaletteForm extends Component {
@@ -125,7 +133,7 @@ class NewPaletteForm extends Component {
 
 render(){
   const { open, colors} = this.state
-  const { maxColors,palettes } = this.props
+  const { maxColors,palettes, classes } = this.props
   let disabled = colors.length >= maxColors
   return (
     
@@ -144,6 +152,8 @@ render(){
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
+            dispaly: 'flex',
+            alignItems: 'center'
           },
         }}
         variant="persistent"
@@ -156,27 +166,31 @@ render(){
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <Typography variant='h4'>
-          Design Your Palette
-        </Typography>
-        <div>
-          <Button 
-            onClick={this.clearPalette}
-            variant='contained' 
-            color='secondary' 
-          >Clear Palette</Button>
-          <Button 
-            onClick={this.handleRandomColor}
-            variant='contained'
-            color='primary'
-            disabled={disabled}
-          >Random Color</Button>
-        </div>
-        <ColorPickerForm 
-          disabled={disabled} 
-          addColor={this.addColor}
-          colors={this.state.colors}
-        />
+        <DrawerContainer className={classes.container}>
+          <Typography variant='h4' gutterBottom>
+            Design Your Palette
+          </Typography>
+          <Box sx={{width: '100%'}}>
+            <Button 
+              sx={{width: '50%'}}
+              onClick={this.clearPalette}
+              variant='contained' 
+              color='secondary' 
+            >Clear Palette</Button>
+            <Button 
+              sx={{width: '50%'}}
+              onClick={this.handleRandomColor}
+              variant='contained'
+              color='primary'
+              disabled={disabled}
+            >Random Color</Button>
+          </Box>
+          <ColorPickerForm 
+            disabled={disabled} 
+            addColor={this.addColor}
+            colors={this.state.colors}
+          />
+        </DrawerContainer>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
