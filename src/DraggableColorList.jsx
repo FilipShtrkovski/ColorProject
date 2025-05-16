@@ -13,6 +13,7 @@ const DraggableColorList = ({colors, handleDelete, sortedColors}) => {
         >
             {colors.map((color, i)=>(
                 <DraggableColorBox 
+                    key={color.name}
                     index={i}
                     handleDelete={() => handleDelete(color.name)} 
                     color={color.color} 
