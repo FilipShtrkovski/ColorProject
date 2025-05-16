@@ -3,6 +3,7 @@ import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import {Link} from 'react-router-dom'
 
 import { styled } from '@mui/material/styles';
+import { withStyles } from '@mui/styles'
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import MiniAppBar from '@mui/material/AppBar';
@@ -14,6 +15,19 @@ import { Button } from '@mui/material';
 
 const drawerWidth = 450;
 
+const styles = {
+  root: {
+    display: 'flex'
+  },
+  bts: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection:'row',
+    marginRight: '1.5rem'
+  }
+  
+}
+
 const AppBar = styled(MiniAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
   })(({ theme }) => ({
@@ -21,6 +35,8 @@ const AppBar = styled(MiniAppBar, {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    justifyContent:'space-between',
+    flexDirection: 'row',
     variants: [
       {
         props: ({ open }) => open,
@@ -32,25 +48,26 @@ const AppBar = styled(MiniAppBar, {
             duration: theme.transitions.duration.enteringScreen,
           }),
         },
+
       },
-    ],
-  }));
+    ]
+  }
+));
 
 class PaletteFormNav extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            newPaletteName: ''
-        }
-    }
-    
+  constructor(props){
+      super(props)
+      this.state = {
+          newPaletteName: ''
+      }
+  }
 
     componentDidMount(){
-        ValidatorForm.addValidationRule('paletteNameUnique', (value) => 
-            this.props.palettes.every(
-              ({paletteName}) => paletteName.toLowerCase() !== value.toLowerCase()
-            )
-          );
+      ValidatorForm.addValidationRule('paletteNameUnique', (value) => 
+          this.props.palettes.every(
+            ({paletteName}) => paletteName.toLowerCase() !== value.toLowerCase()
+          )
+      );
     }
 
     handleChange = (evt) => {
@@ -60,54 +77,51 @@ class PaletteFormNav extends Component {
       }
     
   render() {
-    const {handleDrawerOpen, open, handleSubmit} = this.props
+    const {handleDrawerOpen, open, handleSubmit,classes} = this.props
     const {newPaletteName} = this.state
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
-            <AppBar position="fixed" color="default" open={open}>
-                <Toolbar>
-                <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={handleDrawerOpen}
-                    edge="start"
-                    sx={[
-                    {
-                        mr: 2,
-                    },
-                    open && { display: 'none' },
-                    ]}
-                >
-                    <MenuIcon />
-                </IconButton>
-                <Typography variant="h6" noWrap component="div">
-                    Color Palette
-                </Typography>
-                <ValidatorForm onSubmit={() => handleSubmit(newPaletteName)}>
-                    <TextValidator 
-                    name='newPaletteName'
-                    label='Palette Name'
-                    onChange={this.handleChange}
-                    value={newPaletteName}
-                    validators={['required', 'paletteNameUnique']}
-                    errorMessages={['Enter Palette Name', 'Palette Name Already Exists']}/>
-                    
-                    <Button 
-                    variant='contained' 
-                    color='primary' 
-                    type='submit'
-                    >
-                    Save Palette
-                    </Button>
-                </ValidatorForm>
-                  <Link to='/'>
-                        <Button variant='contained' color='secondary'>Go Back</Button>
-                    </Link>
-                </Toolbar>
-        </AppBar>
+      <Box className={classes.root}>
+        <CssBaseline />
+        <AppBar position="fixed" color="default" open={open}>
+          <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx = { [ { mr: 2, }, open && { display: 'none' } ] }
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div">
+            Color Palette
+          </Typography>
+          </Toolbar>
+          <Box className={ classes.bts }>
+            <ValidatorForm className={ classes.form } onSubmit={() => handleSubmit(newPaletteName)}>
+              <TextValidator 
+                name='newPaletteName'
+                label='Palette Name'
+                onChange={ this.handleChange }
+                value={ newPaletteName }
+                validators={ ['required', 'paletteNameUnique'] }
+                errorMessages={ ['Enter Palette Name', 'Palette Name Already Exists'] }
+              />
+              <Button 
+                variant='contained' 
+                color='primary' 
+                type='submit'
+              >
+                Save Palette
+              </Button>
+            </ValidatorForm>
+              <Link to='/'>
+                <Button variant='contained' color='secondary'>Go Back</Button>
+              </Link>
+            </Box>
+          </AppBar>
         </Box>
-        )
+      )
     }
 }
-export default PaletteFormNav
+export default withStyles(styles, styled,  { withTheme: true })(PaletteFormNav)
