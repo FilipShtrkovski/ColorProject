@@ -1,3 +1,5 @@
+
+
 export default {
     root: {
         backgroundColor: "white",
@@ -38,5 +40,19 @@ export default {
         margin: "0 auto",
         positions: "relative",
         marginBottom: "-3.5px"
+    },
+    deleteIcon:{
+        color: 'white',
+        backgroundColor: '#eb3d30',
+        width: '20px',
+        height: '20px',
+        position: 'absolute',
+        top: '0px',
+        right: '0px',
+        padding: '10px',
+        zIndex: 10,
+        opacity: 0,
+
+
     }
 }
