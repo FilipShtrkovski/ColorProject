@@ -52,7 +52,7 @@ class PaletteFormNav extends Component {
             <PaletteIcon color="primary" fontSize='large'/>
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Make A Custom Palette
+            Custom Palette
           </Typography>
           </Toolbar>
           <BoxBts>
