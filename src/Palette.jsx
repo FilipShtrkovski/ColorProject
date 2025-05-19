@@ -12,15 +12,13 @@ class Palette extends Component {
       level: 500,
       format: 'hex'
     }
-    this.changeLevel = this.changeLevel.bind(this)
-    this.changeFormat = this.changeFormat.bind(this)
   }
   
-  changeLevel(level){
+  changeLevel = (level) => {
     this.setState({level})
   }
 
-  changeFormat(value){
+  changeFormat = (value) => {
     this.setState({format: value})
   }
 
