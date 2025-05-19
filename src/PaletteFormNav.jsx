@@ -1,57 +1,16 @@
 import { Component } from 'react';
 import {Link} from 'react-router-dom'
 import PaletteMetaForm from './PaletteMetaForm';
+import { Root, BoxBts, AppBar, styled} from './styles/PaletteFormNavStyles'
 
-import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
-import { styled } from '@mui/material/styles';
 import { withStyles } from '@mui/styles'
-import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import MiniAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import PaletteIcon from '@mui/icons-material/Palette';
 import { Button } from '@mui/material';
 
-const drawerWidth = 450;
-
-const Root = styled(Box)(()=> ({
-  display: 'flex',
-}))
-
-const BoxBts = styled(Box)(() => ({
-  display: 'flex',
-  alignItems: 'center',
-  flexDirection:'row',
-  marginRight: '1.5rem'
-}));
-
-const AppBar = styled(MiniAppBar, {
-    shouldForwardProp: (prop) => prop !== 'open',
-  })(({ theme }) => ({
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    justifyContent:'space-between',
-    flexDirection: 'row',
-    variants: [
-      {
-        props: ({ open }) => open,
-        style: {
-          width: `calc(100% - ${drawerWidth}px)`,
-          marginLeft: `${drawerWidth}px`,
-          transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-          }),
-        },
-
-      },
-    ]
-  }
-));
 
 class PaletteFormNav extends Component {
   constructor(props){
@@ -71,7 +30,11 @@ class PaletteFormNav extends Component {
   showForm = () => {
     this.setState({formShowing: true})
   }
-    
+   
+  hideForm = () => {
+    this.setState({formShowing: false})
+  }
+
   render() {
     const {handleDrawerOpen, open, handleSubmit, palettes} = this.props
     return (
@@ -86,10 +49,10 @@ class PaletteFormNav extends Component {
             edge="start"
             sx = { [ { mr: 2, }, open && { display: 'none' } ] }
           >
-            <MenuIcon />
+            <PaletteIcon color="primary" fontSize='large'/>
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Color Palette
+            Make A Custom Palette
           </Typography>
           </Toolbar>
           <BoxBts>
@@ -101,7 +64,10 @@ class PaletteFormNav extends Component {
               </Link>
           </BoxBts>
           </AppBar>
-          {this.state.formShowing && (<PaletteMetaForm handleSubmit={handleSubmit} palettes={palettes}/>)}
+          {
+            this.state.formShowing && 
+            (<PaletteMetaForm handleSubmit={handleSubmit} hideForm={this.hideForm} palettes={palettes}/>)
+          }
         </Root>
       )
     }

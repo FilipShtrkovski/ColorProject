@@ -2,11 +2,12 @@
 
 export default {
     root:{
-        backgroundColor: "blue",
+        backgroundColor: "#394bad",
         height: "100vh",
         display: "flex",
         alignItems: "flex-start",
-        justifyContent: "center"
+        justifyContent: "center",
+        overflow: "scroll"
     },
     container: {
         width: "50%",
@@ -31,6 +32,6 @@ export default {
         width: "100%",
         display: "grid",
         gridTemplateColumns: "repeat(3, 1fr)",
-        gridGap: "5%"
+        gridGap: "2.5rem"
     }
 }

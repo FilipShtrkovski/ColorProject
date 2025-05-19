@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
+import Picker from '@emoji-mart/react'
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -11,7 +13,7 @@ class PaletteMetaForm extends Component {
     constructor(props){
         super(props)
         this.state = {
-            open: true,
+            stage: 'form',
             newPaletteName: ''
         }
     }
@@ -30,34 +32,30 @@ class PaletteMetaForm extends Component {
           [evt.target.name]: evt.target.value
         })
     }
+    
+    showEmojiPicker = () => {
+        this.setState({stage: 'emoji'})
+    }
 
-    handleClose = () => {
-        this.setState({open: false});
-    };
+    savePalette = (emoji) => {
+        const newPalette = {paletteName: this.state.newPaletteName, emoji: emoji.native}
+        this.props.handleSubmit(newPalette)
+    }
+
     render() {
-        const {handleSubmit} = this.props
-        const {open, newPaletteName} = this.state
+        const { hideForm } = this.props
+        const { stage, newPaletteName } = this.state
         return (
-
+        <Box>
+        <Dialog open={stage === 'emoji'}>
+            <Picker  onEmojiSelect={this.savePalette} />
+        </Dialog>
         <Dialog
-            open={open}
-            onClose={this.handleClose}
-            // slotProps={{
-            //     paper: {
-            //     component: 'form',
-            //     onSubmit: (event) => {
-            //         event.preventDefault();
-            //         const formData = new FormData(event.currentTarget);
-            //         const formJson = Object.fromEntries(formData.entries());
-            //         const email = formJson.email;
-            //         console.log(email);
-            //         this.handleClose();
-            //     },
-            //     },
-            // }}
+            open={stage === 'form'}
+            onClose={hideForm}
             >
             <DialogTitle>Choose a Palette Name</DialogTitle>
-            <ValidatorForm onSubmit={() => handleSubmit(newPaletteName)}>
+            <ValidatorForm onSubmit={this.showEmojiPicker}>
                 <DialogContent>
                     <DialogContentText>
                         Please enter a name for your new beautiful palette. Make sure
@@ -75,13 +73,14 @@ class PaletteMetaForm extends Component {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={this.handleClose}>Cancel</Button>
+                    <Button onClick={hideForm}>Cancel</Button>
                     <Button variant='contained' color='primary' type='submit'>
                         Save Palette
                     </Button>
                 </DialogActions>
             </ValidatorForm>
         </Dialog>
+        </Box>
         )
     }
 }

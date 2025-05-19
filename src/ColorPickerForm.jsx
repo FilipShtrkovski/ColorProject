@@ -1,27 +1,11 @@
 import React, { Component } from 'react'
 import { ChromePicker } from 'react-color';
+import {AddColor, styles, styled} from './styles/ColorPickerFormStyles'
+
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import { withStyles } from '@mui/styles'
-import { styled } from '@mui/material/styles';
-
 import Box from '@mui/material/Box';
-import { Button } from '@mui/material';
 
-
-const AddColor = styled(Button)(() => ({
-  width: '100%',
-  padding: '1rem',
-  marginTop: '1rem',
-  fontSize: '2rem'
-}));
-
-const styles = {
-  picker: {
-    margin: 'auto',
-    width: '100% !important',
-    marginTop: '2rem'
-  }
-}
 
 
 class ColorPickerForm extends Component {
@@ -97,4 +81,4 @@ class ColorPickerForm extends Component {
     )
   }
 }
-export default withStyles( styles, styled)(ColorPickerForm);
+export default withStyles( styles, styled )(ColorPickerForm);

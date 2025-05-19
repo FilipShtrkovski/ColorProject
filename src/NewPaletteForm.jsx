@@ -1,8 +1,11 @@
 import { Component } from 'react';
+import {DrawerHeader, DrawerContainer, Main, styled} from './styles/NewPaletteFormStyles'
+import { DRAWR_WIDTH } from './constants';
+
 import DraggableColorList from './DraggableColorList';
 import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
-import { styled} from '@mui/material/styles';
+
 import { withStyles } from '@mui/styles'
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -11,53 +14,6 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Button } from '@mui/material';
-
-const drawerWidth = 450;
-
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme }) => ({
-    height: 'calc(100vh - 45px)',
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: `-${drawerWidth}px`,
-    variants: [
-      {
-        props: ({ open }) => open,
-        style: {
-          transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-          }),
-          marginLeft: 0,
-        },
-      },
-    ],
-  }),
-);
-
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
-}));
-
-const DrawerContainer = styled('div')(() => ({
-  width: '90%',
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center'
-}));
-
 
 class NewPaletteForm extends Component {
   static defaultProps = {
@@ -92,14 +48,16 @@ class NewPaletteForm extends Component {
     })
   }
 
-  handleSubmit = (newPaletteName) => {
-    let id = newPaletteName.toLowerCase().replace(/ /g, '-') 
-    const newPalette = {
-      paletteName: newPaletteName,
+  handleSubmit = (newPalette) => {
+    const {paletteName, emoji} = newPalette
+    let id = paletteName.toLowerCase().replace(/ /g, '-') 
+    const palette = {
+      paletteName: paletteName,
+      emoji: emoji,
       id: id,
       colors: this.state.colors
     }
-    this.props.savePalette(newPalette)
+    this.props.savePalette(palette)
     this.props.history.push('/')
   }
   
@@ -133,7 +91,7 @@ class NewPaletteForm extends Component {
 
 render(){
   const { open, colors} = this.state
-  const { maxColors,palettes, classes } = this.props
+  const { maxColors,palettes } = this.props
   let disabled = colors.length >= maxColors
   return (
     
@@ -147,10 +105,10 @@ render(){
       />
       <Drawer
         sx={{
-          width: drawerWidth,
+          width: DRAWR_WIDTH,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: drawerWidth,
+            width: DRAWR_WIDTH,
             boxSizing: 'border-box',
             dispaly: 'flex',
             alignItems: 'center'
@@ -166,7 +124,7 @@ render(){
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <DrawerContainer className={classes.container}>
+        <DrawerContainer >
           <Typography variant='h4' gutterBottom>
             Design Your Palette
           </Typography>
@@ -175,7 +133,7 @@ render(){
               sx={{width: '50%'}}
               onClick={this.clearPalette}
               variant='contained' 
-              color='secondary' 
+              color='error' 
             >Clear Palette</Button>
             <Button 
               sx={{width: '50%'}}
