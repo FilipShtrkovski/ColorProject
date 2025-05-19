@@ -5,12 +5,14 @@ export default {
         borderRadius: "5px",
         padding: "0.5rem",
         position: "relative",
-        ocerflow: "hidden",
-        "&:hover": {
-            cursor: "pointer"
+        cursor: "pointer",
+        overflow: "hidden",
+        "&:hover svg": {
+            opacity: 1
         }
     },
     colors: {
+        backgroundColor: "#dae1e4",
         height: "150px",
         borderRadius: "5px",
         overflow: "hidden"

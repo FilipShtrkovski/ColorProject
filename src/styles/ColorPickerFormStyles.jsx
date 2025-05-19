@@ -10,7 +10,6 @@ const AddColor = styled(Button)(() => ({
 
 const styles = {
   picker: {
-    margin: 'auto',
     width: '100% !important',
     marginTop: '2rem'
   }

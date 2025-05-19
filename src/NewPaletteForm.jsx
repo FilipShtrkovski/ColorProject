@@ -91,7 +91,7 @@ class NewPaletteForm extends Component {
 
 render(){
   const { open, colors} = this.state
-  const { maxColors,palettes, classes } = this.props
+  const { maxColors,palettes } = this.props
   let disabled = colors.length >= maxColors
   return (
     
@@ -124,7 +124,7 @@ render(){
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <DrawerContainer className={classes.container}>
+        <DrawerContainer >
           <Typography variant='h4' gutterBottom>
             Design Your Palette
           </Typography>

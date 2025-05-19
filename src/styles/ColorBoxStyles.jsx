@@ -22,7 +22,7 @@ export default {
         position: 'absolute',
         border: 'none',
         right: '0px',
-        bottom: 0,
+        bottom: '0px',
         width: '60px',
         height: '30px',
         textAlign: 'center',
@@ -55,6 +55,7 @@ export default {
         left: '0px',
         bottom: '0px',
         padding: '10px',
+        color: "black",
         letterSpacing: '1px',
         textTransform: 'uppercase',
         fontSize: '12px'
@@ -81,7 +82,7 @@ export default {
         bottom: 0,
         display: 'flex',
         flexDirection: 'column',
-        alignSelf: 'center',
+        alignItems: 'center',
         justifyContent: 'center',
         fontSize: '2rem',
         transform: 'scale(0.1)',
@@ -94,6 +95,10 @@ export default {
             marginBottom: 0,
             padding: '1rem',
             textTransform: 'uppercase'
+        },
+        '& p': {
+            fontSize: '2rem',
+            fontWeight: 100
         }
     },
     showMsg: {
@@ -103,9 +108,5 @@ export default {
         transition: 'all 0.4s ease-in-out',
         transitionDelay: '0.3s',
         textAlign: 'center',
-        '& p': {
-            fontSize: '2rem',
-            fontWeight: 100
-        }
     }
 }

@@ -8,7 +8,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import PaletteIcon from '@mui/icons-material/Palette';
 import { Button } from '@mui/material';
 
 
@@ -49,10 +49,10 @@ class PaletteFormNav extends Component {
             edge="start"
             sx = { [ { mr: 2, }, open && { display: 'none' } ] }
           >
-            <MenuIcon />
+            <PaletteIcon color="primary" fontSize='large'/>
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Color Palette
+            Make A Custom Palette
           </Typography>
           </Toolbar>
           <BoxBts>

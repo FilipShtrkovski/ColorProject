@@ -1,6 +1,6 @@
 import React from "react";
 import { withStyles } from '@mui/styles'
-import styles from './styles/MiniPallete'
+import styles from './styles/MiniPalleteStyles'
 
 
 function MiniPalette(props){
