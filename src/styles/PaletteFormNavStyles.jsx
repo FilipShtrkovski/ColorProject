@@ -1,5 +1,6 @@
 import MiniAppBar from '@mui/material/AppBar';
 import { styled } from '@mui/material/styles';
+import sizes from './sizes';
 import { DRAWR_WIDTH } from '../constants';
 
 const Root = styled('div')(()=> ({
@@ -9,8 +10,10 @@ const Root = styled('div')(()=> ({
 const BoxBts = styled('div')(() => ({
   display: 'flex',
   alignItems: 'center',
-  flexDirection:'row',
-  marginRight: '1.5rem'
+  marginRight: '1.5rem',
+  [sizes.down('xs')]: {
+    margin: 0,
+  },
 }));
 
 const AppBar = styled(MiniAppBar, {
