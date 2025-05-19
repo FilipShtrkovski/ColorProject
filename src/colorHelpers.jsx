@@ -20,7 +20,7 @@ function generatePalette(starterPalette){
                 id: color.name.toLowerCase(),
                 hex: scale[i],
                 rgb: chroma(scale[i]).css(),
-                rgba: chroma(scale[i]).css().replace('rgb', 'rgba').replace(')', ' 1.0)')
+                rgba: chroma(scale[i]).alpha(0.9).css().replace('/ 0.9', '/ 1.0')
             })
         }
     }
