@@ -12,7 +12,7 @@ import Drawer from '@mui/material/Drawer';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import CloseIcon from '@mui/icons-material/Close';
 import { Button } from '@mui/material';
 
 class NewPaletteForm extends Component {
@@ -120,7 +120,7 @@ render(){
       >
         <DrawerHeader>
           <IconButton onClick={this.handleDrawerClose}>
-            <ChevronLeftIcon />
+            <CloseIcon color='primary' fontSize='large'/>
           </IconButton>
         </DrawerHeader>
         <Divider />
