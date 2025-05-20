@@ -1,13 +1,18 @@
 import sizes from './sizes';
+import img from './confetti-doodles.png'
 
 export default {
     root:{
         backgroundColor: "#394bad",
+        backgroundImage: `url(${img})`,
         height: "100vh",
         display: "flex",
         alignItems: "flex-start",
         justifyContent: "center",
-        overflow: "scroll"
+        overflow: "scroll",
+    },
+    heading: {
+        fontSeize: '2rem'
     },
     container: {
         width: "50%",
