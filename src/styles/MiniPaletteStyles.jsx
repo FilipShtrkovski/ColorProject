@@ -44,7 +44,7 @@ const Title = styled('h5')(() => ({
     postiton: "relative"
 }));
 
-const Emoji = styled('div')(() => ({
+const Emoji = styled('span')(() => ({
     marginLeft: "0.5rem",
     fontSize: "1.5rem"
 }));
