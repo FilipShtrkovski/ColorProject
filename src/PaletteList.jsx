@@ -15,8 +15,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import Avatar from '@mui/material/Avatar';
 import { blue, red } from '@mui/material/colors'
 
-
-import styles from './styles/PaletteListStyles'
+import {Root, Header, Navbar, Container, Palettes, styled} from './styles/PaletteListStyles'
 
 class PaletteList extends Component{
     constructor(props){
@@ -44,16 +43,16 @@ class PaletteList extends Component{
         this.props.history.push(`/palette/${id}`)
     }
     render(){
-        const {palettes, classes} = this.props
+        const {palettes} = this.props
         const {openDeleteDialog } = this.state
         return(
-            <div className={classes.root}>
-                <div className={classes.container}>
-                    <nav className={classes.nav}>
-                        <h1 className={classes.heading}>ColorPalette</h1>
+            <Root>
+                <Container>
+                    <Navbar>
+                        <Header>ColorPalette</Header>
                         <Link to='/palette/new'>Create Palette</Link>
-                    </nav>
-                    <div className={classes.palettes}>
+                    </Navbar>
+                    <Palettes>
                         {palettes.map(palette => (
                             <MiniPalette 
                                 key={palette.id}
@@ -64,8 +63,8 @@ class PaletteList extends Component{
                                 openDialog={this.openDialog}
                             />
                         ))}
-                    </div>
-                </div>
+                    </Palettes>
+                </Container>
                 <Dialog 
                     aria-labelledby="delete-dialog-title"
                     open={openDeleteDialog} 
@@ -100,9 +99,9 @@ class PaletteList extends Component{
                     </List>
                     
                 </Dialog>
-            </div>
+            </Root>
         )
     }
 }
 
-export default withStyles(styles)(PaletteList)
+export default withStyles(styled)(PaletteList)

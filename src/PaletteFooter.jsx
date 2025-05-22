@@ -1,17 +1,17 @@
 import { Component } from "react";
 import { withStyles } from '@mui/styles'
-import styles from './styles/PaletteFooterStyles'
+import { PaletteFooterContent, Emoji, styled } from './styles/PaletteFooterStyles'
 
 class PaletteFooter extends Component{
     render(){
-        const {paletteName, emoji, classes} = this.props
+        const {paletteName, emoji} = this.props
         return(
-            <footer className={classes.paletteFooter}>
+            <PaletteFooterContent>
                 {paletteName}
-                <span className={classes.emoji}>{emoji}</span>
-            </footer>
+                <Emoji>{emoji}</Emoji>
+            </PaletteFooterContent>
         )
     }
 }
 
-export default withStyles(styles)(PaletteFooter)
+export default withStyles(styled)(PaletteFooter)

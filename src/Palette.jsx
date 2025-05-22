@@ -3,7 +3,7 @@ import ColorBox from './ColorBox'
 import Navbar from './Navbar'
 import PaletteFooter from './PaletteFooter'
 import { withStyles } from '@mui/styles'
-import styles from './styles/PaletteStyles'
+import { PaletteContainer, PaletteColors, styled } from './styles/PaletteStyles'
 
 class Palette extends Component {
   constructor(props){
@@ -24,7 +24,6 @@ class Palette extends Component {
 
   render(){
     const { colors, paletteName, emoji, id } = this.props.palette
-    const { classes } = this.props
     const { level, format } = this.state
     const colorBoxes = colors[level].map(color => (
       <ColorBox 
@@ -37,13 +36,13 @@ class Palette extends Component {
       />
     ))
     return (
-      <div className={classes.palette}>
+      <PaletteContainer>
         <Navbar level={level} changeLevel={this.changeLevel} handleChange={this.changeFormat} showingAllColors={true}/>
-        <div className={classes.paletteColors}>{colorBoxes}</div>
+        <PaletteColors>{colorBoxes}</PaletteColors>
         <PaletteFooter paletteName={paletteName} emoji={emoji}/>
-      </div>
+      </PaletteContainer>
       )
   }
 }
 
-export default withStyles(styles)(Palette)
+export default withStyles(styled)(Palette)
