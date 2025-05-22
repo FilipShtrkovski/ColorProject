@@ -1,10 +1,10 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import { withStyles } from '@mui/styles'
 import { FaTrashCan } from "react-icons/fa6";
 import styles from './styles/MiniPalleteStyles'
 
 
-class MiniPalette extends Component{
+class MiniPalette extends PureComponent{
     constructor(props){
         super(props) 
     }
@@ -15,11 +15,12 @@ class MiniPalette extends Component{
     }
     
     render(){
-        const {classes, paletteName, emoji, handleClick, colors} = this.props;
+        const {classes, paletteName, emoji, handleClick, colors, id} = this.props;
+        console.log(paletteName)
         const miniColorBoxes = colors.map(color => (
         <div key={color.name} className={classes.miniColor} style={{backgroundColor: color.color}}/>))
         return(
-            <div className={classes.root} onClick={handleClick}>
+            <div className={classes.root} onClick={()=>handleClick(id)}>
                 <FaTrashCan onClick={this.handleDelete} className={classes.deleteIcon} 
                 style={{transition: 'all 0.3s ease-in-out'}}/>
                 <div className={classes.colors}>{miniColorBoxes}</div>
