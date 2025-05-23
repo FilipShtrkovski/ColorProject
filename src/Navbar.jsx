@@ -1,45 +1,41 @@
 import { Component } from "react";
 import Slider from 'rc-slider';
 import {Link} from 'react-router-dom'
+
 import { withStyles } from '@mui/styles'
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { NavbarContent, Logo, SliderContent, SelectContainer, styled } from './styles/NavbarStyles';
 import Box from '@mui/material/Box';
 import 'rc-slider/assets/index.css';
-
+import { NavbarContent, Logo, SliderContent, SelectContainer, styled } from './styles/NavbarStyles';
 
 
 class Navbar extends Component{
     constructor(props){
         super(props)
         this.state = {format: 'hex', open: false}
-        this.handleFormatChange = this.handleFormatChange.bind(this)
-        this.handleClose = this.handleClose.bind(this)
-        this.handleClick = this.handleClick.bind(this)
     }
 
-    handleFormatChange(evt){
+    handleFormatChange = (evt) => {
         this.setState({format: evt.target.value, open: true})
         this.props.handleChange(evt.target.value)
     }
 
-    handleClose(event, reason){
+    handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             this.setState({open:false})
         }
         this.setState({open:false});
     }
     
-    handleClick(){
+    handleClick = () => {
         this.setState({open:true});
       };
     
     render(){
-        
         const {level, changeLevel, showingAllColors} = this.props
         const {format} = this.state
         return(
@@ -60,7 +56,6 @@ class Navbar extends Component{
                         </SliderContent>   
                     </Box>
                 }
-                
                 <SelectContainer>
                     <Select value={format} onChange={this.handleFormatChange}>
                         <MenuItem value='hex'>HEX - #ffffff</MenuItem>

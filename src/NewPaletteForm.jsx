@@ -14,18 +14,20 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button } from '@mui/material';
+import seedColors from './seedColors'
 
 class NewPaletteForm extends Component {
+  
   static defaultProps = {
     maxColors: 20
   }
+
   constructor(props){
     super(props)
     this.state = {
       open:false,
-      colors: this.props.palettes[0].colors
+      colors: seedColors[0].colors
     }
-
   }
   
   handleDrawerOpen = () => {
@@ -60,8 +62,6 @@ class NewPaletteForm extends Component {
     this.props.savePalette(palette)
     this.props.history.push('/')
   }
-  
-  
 
   handleDelete = (colorName) => {
     this.setState({
@@ -94,7 +94,6 @@ render(){
   const { maxColors,palettes } = this.props
   let disabled = colors.length >= maxColors
   return (
-    
     <Box sx={{ display: 'flex'}}>
       <PaletteFormNav 
         handleDrawerOpen={this.handleDrawerOpen}
@@ -146,7 +145,7 @@ render(){
           <ColorPickerForm 
             disabled={disabled} 
             addColor={this.addColor}
-            colors={this.state.colors}
+            colors={colors}
           />
         </DrawerContainer>
       </Drawer>

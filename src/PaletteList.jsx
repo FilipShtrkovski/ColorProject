@@ -14,7 +14,6 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import Avatar from '@mui/material/Avatar';
 import { blue, red } from '@mui/material/colors'
-
 import {Root, Header, Navbar, Container, Palettes, styled} from './styles/PaletteListStyles'
 
 class PaletteList extends Component{
@@ -42,6 +41,7 @@ class PaletteList extends Component{
     goToPalette = (id) => {
         this.props.history.push(`/palette/${id}`)
     }
+    
     render(){
         const {palettes} = this.props
         const {openDeleteDialog } = this.state
@@ -59,7 +59,6 @@ class PaletteList extends Component{
                                 id={palette.id}
                                 {...palette} 
                                 handleClick={this.goToPalette}
-                                // deletePalette={deletePalette}
                                 openDialog={this.openDialog}
                             />
                         ))}

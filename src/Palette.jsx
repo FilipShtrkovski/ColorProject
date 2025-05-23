@@ -2,6 +2,7 @@ import { Component } from 'react'
 import ColorBox from './ColorBox'
 import Navbar from './Navbar'
 import PaletteFooter from './PaletteFooter'
+
 import { withStyles } from '@mui/styles'
 import { PaletteContainer, PaletteColors, styled } from './styles/PaletteStyles'
 

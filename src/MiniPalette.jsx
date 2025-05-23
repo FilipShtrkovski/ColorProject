@@ -4,9 +4,6 @@ import { FaTrashCan } from "react-icons/fa6";
 import {Colors, Root, Title, Emoji, MiniColor, styled } from './styles/MiniPaletteStyles'
 
 class MiniPalette extends PureComponent{
-    constructor(props){
-        super(props) 
-    }
 
     handleDelete = (evt) => {
         evt.stopPropagation()
@@ -29,7 +26,6 @@ class MiniPalette extends PureComponent{
                 <Colors>{miniColorBoxes}</Colors>
                 <Title>{paletteName} <Emoji>{emoji}</Emoji></Title>
             </Root>
-        
         )
     }
 }

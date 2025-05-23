@@ -3,6 +3,7 @@ import Navbar from './Navbar'
 import { Link } from 'react-router-dom'
 import PaletteFooter from "./PaletteFooter";
 import { Component } from "react";
+
 import { withStyles } from '@mui/styles'
 import { PaletteContainer, PaletteColors, GoBack, styled } from './styles/SingleColorPalette'
 

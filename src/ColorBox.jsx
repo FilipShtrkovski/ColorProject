@@ -1,10 +1,11 @@
 import { Component } from 'react'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
-import {Link} from 'react-router-dom'
-import styles from './styles/ColorBoxStyles'
+import {Link} from 'react-router-dom' 
+
 import { withStyles } from '@mui/styles'
 import Box from '@mui/material/Box';
 import { SingleColorBox, Heading, Span, ColorName, BoxContent, CopyButton, styled} from './styles/ColorBoxStyles'
+import styles from './styles/ColorBoxStyles'
 
 class ColorBox extends Component {
     constructor(props){
@@ -12,10 +13,9 @@ class ColorBox extends Component {
         this.state = {
             copied: false
         }
-        this.changeCopyState = this.changeCopyState.bind(this)
     }
 
-    changeCopyState(){
+    changeCopyState = () => {
         this.setState({copied: true},()=>{
         setTimeout(() => {
             this.setState({copied: false})

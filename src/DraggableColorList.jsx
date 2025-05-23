@@ -1,4 +1,3 @@
-import React from "react"
 import { ReactSortable } from "react-sortablejs";
 import DraggableColorBox from "./DraggableColorBox"
 

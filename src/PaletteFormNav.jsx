@@ -11,8 +11,6 @@ import IconButton from '@mui/material/IconButton';
 import PaletteIcon from '@mui/icons-material/Palette';
 import { Button } from '@mui/material';
 
-
-
 class PaletteFormNav extends Component {
   constructor(props){
       super(props)

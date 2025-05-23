@@ -6,7 +6,7 @@ const DraggableColorBox = (props) => {
   const {handleDelete, name, color} = props
   return (
     <Root sx={{backgroundColor:color}}>
-      <BoxContent >
+      <BoxContent color={color}>
         <span>{name}</span>
         <FaTrashCan onClick={handleDelete} style={{transition: 'all 0.3s ease-in-out'}}/>
       </BoxContent>
