@@ -53,7 +53,9 @@ class App extends Component {
             <PaletteList 
               palettes={this.state.palettes} 
               {...routeProps} 
-              deletePalette={this.deletePalette}/>}/>
+              deletePalette={this.deletePalette}
+            />
+          }/>
 
           <Route exact path='/palette/:id' render={(routeProps)=>
            <Palette palette={
@@ -70,6 +72,14 @@ class App extends Component {
               />
             }  
           />
+
+          <Route render={(routeProps) => 
+            <PaletteList 
+              palettes={this.state.palettes} 
+              {...routeProps} 
+              deletePalette={this.deletePalette}
+            />
+          }/>
         </Switch>
       </div>
       )
