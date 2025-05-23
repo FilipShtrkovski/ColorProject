@@ -31,7 +31,6 @@ class SingleColorPalette extends Component{
     render(){
         const {format} = this.state
         const {paletteName, emoji, id} = this.props.palette
-        const {classes} = this.props
         const colorBoxes = this._shades.map(color => (
             <ColorBox key={color.name} name={color.name} background={color[format]} showingFillPalette={false}/>
         ))
