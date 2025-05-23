@@ -1,4 +1,4 @@
-import { styled} from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import { DRAWR_WIDTH } from '../constants';
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(

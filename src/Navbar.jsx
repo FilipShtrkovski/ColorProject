@@ -1,80 +1,77 @@
 import { Component } from "react";
 import Slider from 'rc-slider';
 import {Link} from 'react-router-dom'
+
 import { withStyles } from '@mui/styles'
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import styles from './styles/NavbarStyles'
+import Box from '@mui/material/Box';
 import 'rc-slider/assets/index.css';
+import { NavbarContent, Logo, SliderContent, SelectContainer, styled } from './styles/NavbarStyles';
 
 
 class Navbar extends Component{
     constructor(props){
         super(props)
         this.state = {format: 'hex', open: false}
-        this.handleFormatChange = this.handleFormatChange.bind(this)
-        this.handleClose = this.handleClose.bind(this)
-        this.handleClick = this.handleClick.bind(this)
     }
 
-    handleFormatChange(evt){
+    handleFormatChange = (evt) => {
         this.setState({format: evt.target.value, open: true})
         this.props.handleChange(evt.target.value)
     }
 
-    handleClose(event, reason){
+    handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             this.setState({open:false})
         }
         this.setState({open:false});
     }
     
-    handleClick(){
+    handleClick = () => {
         this.setState({open:true});
       };
     
     render(){
-        
-        const {level, changeLevel, showingAllColors, classes} = this.props
+        const {level, changeLevel, showingAllColors} = this.props
         const {format} = this.state
         return(
-            <nav className={classes.navbar}>
-                <div className={classes.logo}>
+            <NavbarContent>
+                <Logo>
                     <Link to="/">ColorPicker</Link>
-                </div>
+                </Logo>
                 {showingAllColors && 
-                    <div>
+                    <Box>
                         <span>Level: {level}</span>
-                        <div className={classes.slider}>
+                        <SliderContent>
                             <Slider 
                             defaultValue={level} 
                             min={100} max={900} 
                             onChangeComplete={changeLevel} 
                             onClose={this.handleClose}
                             step={100}/>
-                        </div>   
-                    </div>
+                        </SliderContent>   
+                    </Box>
                 }
-                
-                <div className={classes.selectContainer}>
+                <SelectContainer>
                     <Select value={format} onChange={this.handleFormatChange}>
                         <MenuItem value='hex'>HEX - #ffffff</MenuItem>
                         <MenuItem value='rgb'>RGB - rgb(255, 255, 255)</MenuItem>
                         <MenuItem value='rgba'>RGBA - rgba(255, 255, 255, 1.0)</MenuItem>
                     </Select>
-                </div>
+                </SelectContainer>
                 <Snackbar 
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-                open={this.state.open}
-                autoHideDuration={6000}
-                message={<span id="message-id">Format Changed to {format.toUpperCase()}!</span>}
-                slotProps = {{
-                    "aria-describedby": "message-id"
-                }}
-                action={[
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                    open={this.state.open}
+                    autoHideDuration={6000}
+                    message={<span id="message-id">Format Changed to {format.toUpperCase()}!</span>}
+                    slotProps = {{
+                        "aria-describedby": "message-id"
+                    }}
+                    action={[
                     <IconButton
                         size="small"
                         aria-label="close"
@@ -85,9 +82,10 @@ class Navbar extends Component{
                     </IconButton>
                 ]}
                 onClose={this.handleClose}/>
-            </nav>
+            </NavbarContent>
         )
     }
 }
 
-export default withStyles(styles)(Navbar)
+export default withStyles(styled)(Navbar)
+

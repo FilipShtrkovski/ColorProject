@@ -1,21 +1,32 @@
-import React from "react";
+import { PureComponent } from "react";
 import { withStyles } from '@mui/styles'
-import styles from './styles/MiniPalleteStyles'
+import { FaTrashCan } from "react-icons/fa6";
+import {Colors, Root, Title, Emoji, MiniColor, styled } from './styles/MiniPaletteStyles'
 
+class MiniPalette extends PureComponent{
 
-function MiniPalette(props){
-    const {classes, paletteName, emoji, colors} = props;
-    const miniColorBoxes = colors.map(color => (
-        <div key={color.name} className={classes.miniColor} style={{backgroundColor: color.color}}/>
-    ))
+    handleDelete = (evt) => {
+        evt.stopPropagation()
+        this.props.openDialog(this.props.id)
+    }
     
-    return(
-        <div className={classes.root} onClick={props.handleClick}>
-            <div className={classes.colors}>
-                {miniColorBoxes}
-            </div>
-            <h5 className={classes.title}>{paletteName} <span className={classes.emoji}>{emoji}</span></h5>
-        </div>
-    )
+    render(){
+        const {classes, paletteName, emoji, handleClick, colors, id} = this.props;
+        const miniColorBoxes = colors.map(color => (
+        <MiniColor 
+            key={color.name} 
+            sx={{backgroundColor: color.color}}
+        />))
+        return(
+            <Root onClick={()=>handleClick(id)}>
+                <FaTrashCan 
+                    onClick={this.handleDelete} 
+                    className={classes.deleteIcon} 
+                    style={{transition: 'all 0.3s ease-in-out'}}/>
+                <Colors>{miniColorBoxes}</Colors>
+                <Title>{paletteName} <Emoji>{emoji}</Emoji></Title>
+            </Root>
+        )
+    }
 }
-export default withStyles(styles)(MiniPalette)
+export default withStyles(styled)(MiniPalette)

@@ -12,20 +12,22 @@ import Drawer from '@mui/material/Drawer';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import CloseIcon from '@mui/icons-material/Close';
 import { Button } from '@mui/material';
+import seedColors from './seedColors'
 
 class NewPaletteForm extends Component {
+  
   static defaultProps = {
     maxColors: 20
   }
+
   constructor(props){
     super(props)
     this.state = {
       open:false,
-      colors: this.props.palettes[0].colors
+      colors: seedColors[0].colors
     }
-
   }
   
   handleDrawerOpen = () => {
@@ -60,8 +62,6 @@ class NewPaletteForm extends Component {
     this.props.savePalette(palette)
     this.props.history.push('/')
   }
-  
-  
 
   handleDelete = (colorName) => {
     this.setState({
@@ -71,9 +71,18 @@ class NewPaletteForm extends Component {
 
   handleRandomColor = () => {
     const allColors = this.props.palettes.map(p => p.colors).flat()
-    const rand  = Math.floor(Math.random() * allColors.length)
+    let rand
+    let randomColor
+    let duplicateColor = true 
+    while(duplicateColor){
+      rand = Math.floor(Math.random() * allColors.length)
+      randomColor = allColors[rand]
+      duplicateColor = this.state.colors.some(
+        color => color.name === randomColor.name
+      )
+    }
     this.setState({
-      colors: [...this.state.colors, allColors[rand]]
+      colors: [...this.state.colors, randomColor]
     })
   }
 
@@ -94,7 +103,6 @@ render(){
   const { maxColors,palettes } = this.props
   let disabled = colors.length >= maxColors
   return (
-    
     <Box sx={{ display: 'flex'}}>
       <PaletteFormNav 
         handleDrawerOpen={this.handleDrawerOpen}
@@ -120,7 +128,7 @@ render(){
       >
         <DrawerHeader>
           <IconButton onClick={this.handleDrawerClose}>
-            <ChevronLeftIcon />
+            <CloseIcon color='primary' fontSize='large'/>
           </IconButton>
         </DrawerHeader>
         <Divider />
@@ -146,7 +154,7 @@ render(){
           <ColorPickerForm 
             disabled={disabled} 
             addColor={this.addColor}
-            colors={this.state.colors}
+            colors={colors}
           />
         </DrawerContainer>
       </Drawer>

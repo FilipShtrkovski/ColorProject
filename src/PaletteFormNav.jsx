@@ -11,7 +11,6 @@ import IconButton from '@mui/material/IconButton';
 import PaletteIcon from '@mui/icons-material/Palette';
 import { Button } from '@mui/material';
 
-
 class PaletteFormNav extends Component {
   constructor(props){
       super(props)
@@ -40,7 +39,7 @@ class PaletteFormNav extends Component {
     return (
       <Root>
         <CssBaseline />
-        <AppBar position="fixed" color="default" open={open}>
+        <AppBar  position="fixed" color="default" open={open}>
           <Toolbar>
           <IconButton
             color="inherit"
@@ -52,7 +51,7 @@ class PaletteFormNav extends Component {
             <PaletteIcon color="primary" fontSize='large'/>
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Make A Custom Palette
+            Custom Palette
           </Typography>
           </Toolbar>
           <BoxBts>
