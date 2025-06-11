@@ -15,4 +15,10 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
+  <script>
+    // Redirects all 404s to index.html for React Router
+    if (location.pathname !== "/" && !location.pathname.includes(".")) {
+      location.replace("/");
+    }
+  </script>
 </html>
